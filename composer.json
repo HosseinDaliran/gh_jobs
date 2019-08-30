@@ -1,0 +1,30 @@
+{
+    "name": "drupal/gh_jobs",
+    "description": "Greenhouse Job Board API provide integration with your Greenhouse jobs board.",
+    "type": "drupal-module",
+    "homepage": "https://drupal.org/project/gh_jobs",
+    "authors": [
+        {
+            "name": "Adriano Pulz (adrianopulz)",
+            "email": "adrianopulz@gmail.com",
+            "homepage": "https://www.drupal.org/u/adrianopulz",
+            "role": "Maintainer"
+        },
+        {
+            "name": "Leonardo Post (leonardopost)",
+            "email": "postleonardof@gmail.com",
+            "homepage": "https://www.drupal.org/u/leonardopost",
+            "role": "Co-maintainer"
+        }
+    ],
+    "support": {
+        "issues": "https://drupal.org/project/issues/gh_jobs",
+        "irc": "irc://irc.freenode.org/drupal-contribute",
+        "source": "https://cgit.drupalcode.org/gh_jobs"
+    },
+    "license": "GPL-2.0-or-later",
+    "minimum-stability": "dev",
+    "require": {
+        "grnhse/greenhouse-tools-php": "~1.0"
+    }
+}
