@@ -1,0 +1,5 @@
+name: Greenhouse Job Board API
+description: Provide Greenhouse integrations with Job Board API.
+type: module
+core: 8.x
+package: Third-party Integration
