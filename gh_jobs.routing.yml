@@ -1,0 +1,9 @@
+gh_jobs.settings:
+  path: '/admin/config/services/greenhouse-jobs-api/settings'
+  defaults:
+    _form: '\Drupal\gh_jobs\Form\GHConfigForm'
+    _title: 'Greenhouse Job Board API Settings'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    _admin_route: TRUE

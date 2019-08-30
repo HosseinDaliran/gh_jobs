@@ -1,0 +1,5 @@
+gh_jobs.config_form:
+  title: 'Greenhouse Job Board API Settings'
+  parent: system.admin_config_services
+  description: 'Configure the Greenhouse Job Board API Settings.'
+  route_name: gh_jobs.settings
