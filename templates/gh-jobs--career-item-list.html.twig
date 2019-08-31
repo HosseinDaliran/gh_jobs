@@ -1,0 +1,12 @@
+<li class="job job-{{ job.id }}">
+  <a href="#job">
+    <span class="gh-job-title">{{ job.title }}</span>
+    {% if (job.offices) %}
+      <span class="gh-job-offices"> |
+        {% for office in job.offices %}
+          <span class="gh-office-name">{{ office.name }}</span>
+        {% endfor %}
+      </span>
+    {% endif %}
+  </a>
+</li>
