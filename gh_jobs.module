@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Greenhouse Job Board API module hooks.
+ */
+
+/**
+ * Config settings.
+ *
+ * @var string
+ */
+const SETTINGS = 'gh_jobs.settings';
+
+/**
+ * APIKey config name.
+ *
+ * @var string
+ */
+const API_KEY_CONFIG_NAME = 'api_key';
+
+/**
+ * Board Token config name.
+ *
+ * @var string
+ */
+const BOARD_TOKEN_CONFIG_NAME = 'board_token';
+
+/**
+ * Implements hook_theme().
+ */
+function gh_jobs_theme($existing, $type, $theme, $path) {
+  return [
+    'gh_jobs__career_page' => [
+      'variables' => [
+        'data' => NULL,
+      ],
+    ],
+    'gh_jobs__career_list' => [
+      'variables' => [
+        'jobs' => NULL,
+      ],
+    ],
+    'gh_jobs__career_item_list' => [
+      'variables' => [
+        'job' => NULL,
+      ],
+    ],
+  ];
+}
