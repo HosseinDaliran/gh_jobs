@@ -13,18 +13,11 @@ use Drupal\Core\Form\FormStateInterface;
 class GHConfigForm extends ConfigFormBase {
 
   /**
-   * Config settings.
-   *
-   * @var string
-   */
-  const SETTINGS = 'gh_jobs.settings';
-
-  /**
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
     return [
-      static::SETTINGS,
+      SETTINGS,
     ];
   }
 
@@ -39,7 +32,7 @@ class GHConfigForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config(static::SETTINGS);
+    $config = $this->config(SETTINGS);
 
     $form['api_key'] = [
       '#type' => 'textfield',
@@ -63,11 +56,11 @@ class GHConfigForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Retrieve config factory editable.
-    $config_settings = $this->configFactory->getEditable(static::SETTINGS);
+    $config_settings = $this->configFactory->getEditable(SETTINGS);
 
     // Saving Form fields.
-    $config_settings->set('api_key', $form_state->getValue('api_key'));
-    $config_settings->set('board_token', $form_state->getValue('board_token'));
+    $config_settings->set(API_KEY_CONFIG_NAME, $form_state->getValue('api_key'));
+    $config_settings->set(BOARD_TOKEN_CONFIG_NAME, $form_state->getValue('board_token'));
     $config_settings->save();
 
     parent::submitForm($form, $form_state);
