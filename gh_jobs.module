@@ -27,6 +27,13 @@ const API_KEY_CONFIG_NAME = 'api_key';
 const BOARD_TOKEN_CONFIG_NAME = 'board_token';
 
 /**
+ * Jobs item cache CID.
+ *
+ * @var string
+ */
+const JOBS_CACHE_CID = 'gh_jobs.cached_list';
+
+/**
  * Implements hook_theme().
  */
 function gh_jobs_theme($existing, $type, $theme, $path) {
