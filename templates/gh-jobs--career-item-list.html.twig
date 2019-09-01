@@ -1,3 +1,17 @@
+{#
+/**
+ * @file
+ * Theme for the job item.
+ *
+ * Available variables:
+ * - job: The Greenhouse Job Object with properties from API.
+ *   The methods such as "id", "title", and "office" are available. For example:
+ *   - job.id will return the Job ID.
+ *   - job.offices will return the array of offices for this job.
+ *   For more properties see your Greenhouse JOb fields.
+ *
+ */
+#}
 <li class="job job-{{ job.id }}">
   <a href="#job">
     <span class="gh-job-title">{{ job.title }}</span>
