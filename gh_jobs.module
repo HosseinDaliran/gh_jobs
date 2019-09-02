@@ -27,11 +27,18 @@ const API_KEY_CONFIG_NAME = 'api_key';
 const BOARD_TOKEN_CONFIG_NAME = 'board_token';
 
 /**
- * Jobs item cache CID.
+ * Jobs list cache CID.
  *
  * @var string
  */
 const JOBS_CACHE_CID = 'gh_jobs.cached_list';
+
+/**
+ * Jobs item cache CID.
+ *
+ * @var string
+ */
+const JOB_CACHE_CID = 'gh_jobs.cached_job';
 
 /**
  * Implements hook_theme().
@@ -51,6 +58,17 @@ function gh_jobs_theme($existing, $type, $theme, $path) {
     'gh_jobs__career_item_list' => [
       'variables' => [
         'job' => NULL,
+        'link' => NULL,
+      ],
+    ],
+    'gh_jobs__job_details' => [
+      'variables' => [
+        'job' => NULL,
+        'content' => NULL,
+        'departments' => NULL,
+        'offices' => NULL,
+        'link' => NULL,
+        'apply_form' => NULL,
       ],
     ],
   ];
