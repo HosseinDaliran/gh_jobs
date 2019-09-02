@@ -1,0 +1,28 @@
+<section id="job-{{ job.id }}">
+  <div class="job-header">
+    <div class="job-location">
+      <span class="label">{{ 'Location:'|t }}</span>
+      {{ job.location.name }}
+    </div>
+    <div class="job-departments">
+      <span class="label">{{ 'Departments:'|t }}</span>
+      {{ departments|join(', ') }}
+    </div>
+    <div class="job-offices">
+      <span class="label">{{ 'Offices:'|t }}</span>
+      {{ offices|join(', ') }}
+    </div>
+  </div>
+  <div class="job-content">
+    {% autoescape %}
+      {{ content|raw }}
+    {% endautoescape %}
+  </div>
+  <div class="job-footer">
+    <a href="{{ link }}">{{ 'Go back'|t }}</a>
+  </div>
+</section>
+
+<section id="job-apply">
+  {{ apply_form|raw }}
+</section>
