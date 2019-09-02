@@ -6,6 +6,7 @@ use Drupal\Core\Cache\CacheBackendInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Messenger\Messenger;
+use Drupal\Core\Routing\UrlGeneratorInterface;
 use Greenhouse\GreenhouseToolsPhp\Clients\Exceptions\GreenhouseAPIResponseException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Greenhouse\GreenhouseToolsPhp\GreenhouseService;
@@ -44,11 +45,11 @@ class GHJobsListController extends ControllerBase {
   private $cache;
 
   /**
-   * The cached array of jobs.
+   * Drupal URL service.
    *
-   * @var array
+   * @var \Drupal\Core\Routing\UrlGeneratorInterface
    */
-  private $cachedJobs;
+  protected $urlGenerator;
 
   /**
    * Controller Constructor.
@@ -59,11 +60,14 @@ class GHJobsListController extends ControllerBase {
    *   Drupal Config Factory Interface.
    * @param \Drupal\Core\Cache\CacheBackendInterface $cache
    *   Drupal Cache Data Service.
+   * @param \Drupal\Core\Routing\UrlGeneratorInterface $url_generator
+   *   Drupal URL service.
    */
-  public function __construct(Messenger $messenger, ConfigFactoryInterface $config_factory, CacheBackendInterface $cache) {
+  public function __construct(Messenger $messenger, ConfigFactoryInterface $config_factory, CacheBackendInterface $cache, UrlGeneratorInterface $url_generator) {
     $this->ghConfig = $config_factory->get(SETTINGS);
     $this->messenger = $messenger;
     $this->cache = $cache;
+    $this->urlGenerator = $url_generator;
     $keys = [
       'apiKey' => $this->ghConfig->get(API_KEY_CONFIG_NAME),
       'boardToken' => $this->ghConfig->get(BOARD_TOKEN_CONFIG_NAME),
@@ -78,7 +82,8 @@ class GHJobsListController extends ControllerBase {
     return new static(
       $container->get('messenger'),
       $container->get('config.factory'),
-      $container->get('cache.data')
+      $container->get('cache.data'),
+      $container->get('url_generator')
     );
   }
 
@@ -138,9 +143,11 @@ class GHJobsListController extends ControllerBase {
   private function jobsItemsTheme(array $jobs) {
     $items = [];
     foreach ($jobs as $job) {
+      $link = $this->urlGenerator->generateFromRoute('gh_jobs.job_details', ['id' => $job->id]);
       $items[] = [
         '#theme' => 'gh_jobs__career_item_list',
         '#job' => $job,
+        '#link' => $link,
       ];
     }
 
