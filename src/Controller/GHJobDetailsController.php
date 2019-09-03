@@ -114,6 +114,16 @@ class GHJobDetailsController extends ControllerBase {
       '#offices' => $this->getOffices(),
       '#content' => $this->getContent(),
       '#link' => $this->urlGenerator->generateFromRoute('gh_jobs.open_jobs'),
+      '#attached' => [
+        'library' => [
+          'gh_jobs/embed_gh_board_scrip' => 'gh_jobs/embed_gh_board_scrip',
+        ],
+        'drupalSettings' => [
+          'GHJobs' => [
+            'jid' => $id,
+          ],
+        ],
+      ],
     ];
   }
 
