@@ -7,7 +7,7 @@
   let loaded = false;
 
   function load(id) {
-    if (!loaded) {
+    if (!loaded && typeof Grnhse != "undefined") {
       loaded = true;
       Grnhse.Iframe.load(id);
     }
