@@ -71,7 +71,7 @@ class GHJobDetailsController extends ControllerBase {
    *   Drupal URL service.
    */
   public function __construct(Messenger $messenger, ConfigFactoryInterface $config_factory, CacheBackendInterface $cache, UrlGeneratorInterface $url_generator) {
-    $this->ghConfig = $config_factory->get(SETTINGS);
+    $this->ghConfig = $config_factory->get(GH_JOBS_SETTINGS);
     $this->messenger = $messenger;
     $this->cache = $cache;
     $this->job = NULL;

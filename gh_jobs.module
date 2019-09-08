@@ -10,7 +10,7 @@
  *
  * @var string
  */
-const SETTINGS = 'gh_jobs.settings';
+const GH_JOBS_SETTINGS = 'gh_jobs.settings';
 
 /**
  * APIKey config name.
@@ -84,7 +84,7 @@ function gh_jobs_theme($existing, $type, $theme, $path) {
  * Implements hook_library_info_build().
  */
 function gh_jobs_library_info_build() {
-  $configs = \Drupal::configFactory()->get(SETTINGS);
+  $configs = \Drupal::configFactory()->get(GH_JOBS_SETTINGS);
   $board = $configs->get(BOARD_TOKEN_CONFIG_NAME);
 
   $libraries = [];

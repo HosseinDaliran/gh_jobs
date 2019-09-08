@@ -32,7 +32,7 @@ class GHConfigForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config(SETTINGS);
+    $config = $this->config(GH_JOBS_SETTINGS);
 
     $form['api_key'] = [
       '#type' => 'textfield',
@@ -56,7 +56,7 @@ class GHConfigForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Retrieve config factory editable.
-    $config_settings = $this->configFactory->getEditable(SETTINGS);
+    $config_settings = $this->configFactory->getEditable(GH_JOBS_SETTINGS);
 
     // Saving Form fields.
     $config_settings->set(API_KEY_CONFIG_NAME, $form_state->getValue('api_key'));
