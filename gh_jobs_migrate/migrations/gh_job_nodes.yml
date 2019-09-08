@@ -1,0 +1,75 @@
+id: gh_jobs_nodes
+label: Greenhouse Jobs nodes
+migration_group: Greenhouse Job Migration
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: greenhouse_job_json_parser
+  urls: 'https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs?content=true'
+  item_selector: jobs
+  fields:
+    - name: gh_id
+      label: 'Greenhouse ID'
+      selector: 'id'
+    - name: title
+      label: 'Title'
+      selector: 'title'
+    - name: gh_location
+      label: 'Location'
+      selector: 'location'
+    - name: gh_content
+      label: 'Parent ID'
+      selector: 'content'
+    - name: gh_departments
+      label: 'Parent ID'
+      selector: 'departments'
+    - name: gh_offices
+      label: 'Parent ID'
+      selector: 'offices'
+    - name: updated_at
+      label: 'Updated at'
+      selector: 'updated_at'
+  ids:
+    gh_id:
+      type: string
+process:
+  title: title
+  field_gh_id: gh_id
+  field_gh_location: gh_location
+  field_gh_content/value:
+    plugin: gh_jobs_migrate_process_content
+    source: gh_content
+  field_gh_content/format:
+    plugin: default_value
+    default_value: "full_html"
+  field_gh_departments:
+    plugin: migration_lookup
+    migration: gh_departments_terms
+    no_stub: true
+    source: gh_departments
+  field_gh_offices:
+    plugin: migration_lookup
+    migration: gh_offices_terms
+    no_stub: true
+    source: gh_offices
+  uid:
+    plugin: default_value
+    default_value: 1
+  status:
+    plugin: default_value
+    default_value: 1
+  updated:
+    plugin: format_date
+    from_format: 'Y-m-d\TH:i:sP'
+    to_format: 'Y-m-d\TH:i:s'
+    source: updated_at
+  created:
+    plugin: gh_jobs_migrate_process_date
+    source: updated_at
+destination:
+  plugin: entity:node
+  default_bundle: job
+migration_dependencies:
+  required:
+    - gh_departments_terms
+    - gh_offices_terms
