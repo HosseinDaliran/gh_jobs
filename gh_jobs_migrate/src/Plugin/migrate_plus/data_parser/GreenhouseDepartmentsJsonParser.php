@@ -27,33 +27,6 @@ class GreenhouseDepartmentsJsonParser extends Json {
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function getSourceData($url) {
-    // Call the parent function to retrieve the data.
-    $source_data = parent::getSourceData($url);
-    $values = [];
-
-    foreach ($source_data as $entry) {
-      if (empty($entry['departments'])) {
-        continue;
-      }
-
-      $departments = $entry['departments'];
-      foreach ($departments as $department) {
-        $parent = is_numeric($department['parent_id']) ? $department['parent_id'] : 0;
-        $values[$department['id']] = [
-          'id' => $department['id'],
-          'name' => $department['name'],
-          'parent_id' => $parent,
-        ];
-      }
-    }
-
-    return $values;
-  }
-
-  /**
    * Prepares a given URL for an Jobs Boards web service call.
    *
    * @param string $url

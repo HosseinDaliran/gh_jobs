@@ -5,8 +5,8 @@ source:
   plugin: url
   data_fetcher_plugin: http
   data_parser_plugin: greenhouse_departments_json_parser
-  urls: 'https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs?content=true'
-  item_selector: jobs
+  urls: 'https://boards-api.greenhouse.io/v1/boards/{board_token}/departments'
+  item_selector: departments
   fields:
     - name: gh_id
       label: 'Greenhouse ID'
