@@ -1,0 +1,40 @@
+id: gh_departments_terms
+label: Greenhouse departments taxonomy terms
+migration_group: Greenhouse Job Migration
+source:
+  plugin: url
+  data_fetcher_plugin: http
+  data_parser_plugin: greenhouse_departments_json_parser
+  urls: 'https://boards-api.greenhouse.io/v1/boards/{board_token}/jobs?content=true'
+  item_selector: jobs
+  fields:
+    - name: gh_id
+      label: 'Greenhouse ID'
+      selector: 'id'
+    - name: name
+      label: 'Name'
+      selector: 'name'
+    - name: parent
+      label: 'Parent ID'
+      selector: 'parent_id'
+  ids:
+    gh_id:
+      type: string
+process:
+  name: name
+  field_gh_id: gh_id
+  parent_id:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: parent
+    -
+      plugin: migration_lookup
+      migration: gh_departments_terms
+  parent:
+    plugin: default_value
+    default_value: 0
+    source: '@parent_id'
+destination:
+  plugin: entity:taxonomy_term
+  default_bundle: gh_departments
