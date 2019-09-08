@@ -5,3 +5,5 @@ core: 8.x
 package: Third-party Integration
 dependencies:
   - drupal:migrate
+  - migrate_plus:migrate_plus
+  - migrate_tools:migrate_tools
