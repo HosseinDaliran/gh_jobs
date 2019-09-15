@@ -7,17 +7,6 @@ gh_jobs.settings:
     _permission: 'administer site configuration'
   options:
     _admin_route: TRUE
-gh_jobs.open_jobs:
-  path: '/career'
-  defaults:
-    _controller: '\Drupal\gh_jobs\Controller\GHJobsListController::content'
-    _title: 'Career Opportunities'
-  requirements:
-    _permission: 'access content'
-gh_jobs.job_details:
-  path: '/career/{id}'
-  defaults:
-    _controller: '\Drupal\gh_jobs\Controller\GHJobDetailsController::content'
-    _title_callback: '\Drupal\gh_jobs\Controller\GHJobDetailsController::getTitle'
-  requirements:
-    _permission: 'access content'
+
+route_callbacks:
+  - 'gh_jobs.jobs_routes::routes'

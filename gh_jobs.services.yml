@@ -1,0 +1,4 @@
+services:
+  gh_jobs.jobs_routes:
+    class: Drupal\gh_jobs\Routing\JobsRoutes
+    arguments: ['@module_handler']
