@@ -4,6 +4,7 @@ type: module
 core: 8.x
 package: Third-party Integration
 dependencies:
+  - gh_jobs:gh_jobs
   - drupal:migrate
   - migrate_plus:migrate_plus
   - migrate_tools:migrate_tools
