@@ -58,11 +58,6 @@ process:
   status:
     plugin: default_value
     default_value: 1
-  updated:
-    plugin: format_date
-    from_format: 'Y-m-d\TH:i:sP'
-    to_format: 'Y-m-d\TH:i:s'
-    source: updated_at
   created:
     plugin: gh_jobs_migrate_process_date
     source: updated_at
