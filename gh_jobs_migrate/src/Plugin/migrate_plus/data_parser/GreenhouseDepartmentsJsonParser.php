@@ -3,6 +3,7 @@
 namespace Drupal\gh_jobs_migrate\Plugin\migrate_plus\data_parser;
 
 use Drupal\migrate_plus\Plugin\migrate_plus\data_parser\Json;
+use Drupal\gh_jobs\GhJobsInterface;
 
 /**
  * Obtain JSON data for departments taxonomy.
@@ -12,7 +13,7 @@ use Drupal\migrate_plus\Plugin\migrate_plus\data_parser\Json;
  *   title = @Translation("Greenhouse Departments Json Parser")
  * )
  */
-class GreenhouseDepartmentsJsonParser extends Json {
+class GreenhouseDepartmentsJsonParser extends Json implements GhJobsInterface {
 
   /**
    * {@inheritdoc}
@@ -36,8 +37,8 @@ class GreenhouseDepartmentsJsonParser extends Json {
    *   The URL with placeholder values replaced.
    */
   private function prepareGhBoardUrl($url) {
-    $config = \Drupal::config(GH_JOBS_SETTINGS);
-    $board = $config->get(BOARD_TOKEN_CONFIG_NAME);
+    $config = \Drupal::config(self::GH_JOBS_SETTINGS);
+    $board = $config->get(self::BOARD_TOKEN_CONFIG_NAME);
 
     return str_replace("{board_token}", $board, $url);
   }

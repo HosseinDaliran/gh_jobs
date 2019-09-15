@@ -46,7 +46,7 @@ class JobsRoutes {
     $routes['gh_jobs.open_jobs'] = new Route(
       '/career',
       [
-        '_controller' => '\Drupal\gh_jobs\Controller\GHJobsListController::content',
+        '_controller' => '\Drupal\gh_jobs\Controller\JobsListController::content',
         '_title' => 'Career Opportunities',
       ],
       [
@@ -58,8 +58,8 @@ class JobsRoutes {
     $routes['gh_jobs.job_details'] = new Route(
       '/career/{id}',
       [
-        '_controller' => '\Drupal\gh_jobs\Controller\GHJobDetailsController::content',
-        '_title_callback' => '\Drupal\gh_jobs\Controller\GHJobDetailsController::getTitle',
+        '_controller' => '\Drupal\gh_jobs\Controller\JobDetailsController::content',
+        '_title_callback' => '\Drupal\gh_jobs\Controller\JobDetailsController::getTitle',
       ],
       [
         '_permission'  => 'access content',

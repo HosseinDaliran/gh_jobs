@@ -10,11 +10,12 @@ use Drupal\Core\Routing\UrlGeneratorInterface;
 use Greenhouse\GreenhouseToolsPhp\Clients\Exceptions\GreenhouseAPIResponseException;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Greenhouse\GreenhouseToolsPhp\GreenhouseService;
+use Drupal\gh_jobs\GhJobsInterface;
 
 /**
  * Class GHJobsListController.
  */
-class GHJobsListController extends ControllerBase {
+class JobsListController extends ControllerBase implements GhJobsInterface {
 
   /**
    * The Drupal messenger service.
@@ -64,13 +65,13 @@ class GHJobsListController extends ControllerBase {
    *   Drupal URL service.
    */
   public function __construct(Messenger $messenger, ConfigFactoryInterface $config_factory, CacheBackendInterface $cache, UrlGeneratorInterface $url_generator) {
-    $this->ghConfig = $config_factory->get(GH_JOBS_SETTINGS);
+    $this->ghConfig = $config_factory->get(self::GH_JOBS_SETTINGS);
     $this->messenger = $messenger;
     $this->cache = $cache;
     $this->urlGenerator = $url_generator;
     $keys = [
-      'apiKey' => $this->ghConfig->get(API_KEY_CONFIG_NAME),
-      'boardToken' => $this->ghConfig->get(BOARD_TOKEN_CONFIG_NAME),
+      'apiKey' => $this->ghConfig->get(self::API_KEY_CONFIG_NAME),
+      'boardToken' => $this->ghConfig->get(self::BOARD_TOKEN_CONFIG_NAME),
     ];
     $this->greenhouseService = new GreenhouseService($keys);
   }
@@ -110,7 +111,7 @@ class GHJobsListController extends ControllerBase {
    *   A array of Jobs theme items.
    */
   private function fetchJobsData() {
-    if ($jobs = $this->cache->get(JOBS_CACHE_CID)) {
+    if ($jobs = $this->cache->get(self::JOBS_CACHE_CID)) {
       return $jobs->data;
     }
 
@@ -121,7 +122,7 @@ class GHJobsListController extends ControllerBase {
       $theme_items = $this->jobsItemsTheme($jobs);
 
       // Save the Jobs values on cache.
-      $this->cache->set(JOBS_CACHE_CID, $theme_items);
+      $this->cache->set(self::JOBS_CACHE_CID, $theme_items);
       return $theme_items;
     }
     catch (GreenhouseAPIResponseException $e) {

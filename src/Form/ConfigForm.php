@@ -4,20 +4,21 @@ namespace Drupal\gh_jobs\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\gh_jobs\GhJobsInterface;
 
 /**
- * Class GHConfigForm.
+ * Class ConfigForm.
  *
  * @package Drupal\gh_jobs\Form
  */
-class GHConfigForm extends ConfigFormBase {
+class ConfigForm extends ConfigFormBase implements GhJobsInterface {
 
   /**
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
     return [
-      SETTINGS,
+      self::GH_JOBS_SETTINGS,
     ];
   }
 
@@ -32,7 +33,7 @@ class GHConfigForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config(GH_JOBS_SETTINGS);
+    $config = $this->config(self::GH_JOBS_SETTINGS);
 
     $form['api_key'] = [
       '#type' => 'textfield',
@@ -56,11 +57,11 @@ class GHConfigForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     // Retrieve config factory editable.
-    $config_settings = $this->configFactory->getEditable(GH_JOBS_SETTINGS);
+    $config_settings = $this->configFactory->getEditable(self::GH_JOBS_SETTINGS);
 
     // Saving Form fields.
-    $config_settings->set(API_KEY_CONFIG_NAME, $form_state->getValue('api_key'));
-    $config_settings->set(BOARD_TOKEN_CONFIG_NAME, $form_state->getValue('board_token'));
+    $config_settings->set(self::API_KEY_CONFIG_NAME, $form_state->getValue('api_key'));
+    $config_settings->set(self::BOARD_TOKEN_CONFIG_NAME, $form_state->getValue('board_token'));
     $config_settings->save();
 
     parent::submitForm($form, $form_state);

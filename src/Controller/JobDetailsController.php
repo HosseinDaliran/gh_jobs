@@ -10,11 +10,12 @@ use Drupal\Core\Routing\UrlGeneratorInterface;
 use Greenhouse\GreenhouseToolsPhp\Clients\Exceptions\GreenhouseAPIResponseException;
 use Greenhouse\GreenhouseToolsPhp\GreenhouseService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\gh_jobs\GhJobsInterface;
 
 /**
  * Class GHJobDetailsController.
  */
-class GHJobDetailsController extends ControllerBase {
+class JobDetailsController extends ControllerBase implements GhJobsInterface {
 
   /**
    * The Drupal messenger service.
@@ -71,14 +72,14 @@ class GHJobDetailsController extends ControllerBase {
    *   Drupal URL service.
    */
   public function __construct(Messenger $messenger, ConfigFactoryInterface $config_factory, CacheBackendInterface $cache, UrlGeneratorInterface $url_generator) {
-    $this->ghConfig = $config_factory->get(GH_JOBS_SETTINGS);
+    $this->ghConfig = $config_factory->get(self::GH_JOBS_SETTINGS);
     $this->messenger = $messenger;
     $this->cache = $cache;
     $this->job = NULL;
     $this->urlGenerator = $url_generator;
     $keys = [
-      'apiKey' => $this->ghConfig->get(API_KEY_CONFIG_NAME),
-      'boardToken' => $this->ghConfig->get(BOARD_TOKEN_CONFIG_NAME),
+      'apiKey' => $this->ghConfig->get(self::API_KEY_CONFIG_NAME),
+      'boardToken' => $this->ghConfig->get(self::BOARD_TOKEN_CONFIG_NAME),
     ];
     $this->greenhouseService = new GreenhouseService($keys);
   }
@@ -152,7 +153,7 @@ class GHJobDetailsController extends ControllerBase {
    *   A Job object or NULL.
    */
   private function getJobById($id) {
-    if ($job = $this->cache->get(JOB_CACHE_CID . "_{$id}")) {
+    if ($job = $this->cache->get(self::JOB_CACHE_CID . "_{$id}")) {
       $this->setJob($job->data);
       return $this->job;
     }
@@ -164,7 +165,7 @@ class GHJobDetailsController extends ControllerBase {
       $this->setJob($job);
 
       // Save the Jobs values on cache.
-      $this->cache->set(JOB_CACHE_CID . "_{$id}", $this->job);
+      $this->cache->set(self::JOB_CACHE_CID . "_{$id}", $this->job);
     }
     catch (GreenhouseAPIResponseException $e) {
       $this->messenger->addMessage($this->t('We could not get this job from Greenhouse API.'), 'error');
