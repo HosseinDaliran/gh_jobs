@@ -22,7 +22,6 @@ class ProcessDate extends ProcessPluginBase {
    */
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $time = strtotime($value);
-    $formatted = \Drupal::service('date.formatter')->format($time, 'custom', 'Y-m-d\TH:i:s');
 
     return $time;
   }
