@@ -1,0 +1,7 @@
+services:
+  logger.channel.gh_jobs_migrate:
+    parent: logger.channel_base
+    arguments: ['gh_jobs_migrate']
+  gh_jobs.jobs_migrate_update:
+    class: Drupal\gh_jobs_migrate\Service\MigrateJobsUpdate
+    arguments: ['@plugin.manager.migration', '@logger.channel.gh_jobs_migrate']

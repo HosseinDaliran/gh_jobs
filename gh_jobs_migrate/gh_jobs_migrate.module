@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * @file
+ * Greenhouse Job Migrate module hooks.
+ */
+
+/**
+ * Implements hook_cron().
+ */
+function gh_jobs_migrate_cron() {
+  // Execute the Jobs migration service.
+  \Drupal::service('gh_jobs.jobs_migrate_update')->execute();
+}
