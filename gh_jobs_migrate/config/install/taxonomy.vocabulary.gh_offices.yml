@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Offices
+vid: gh_offices
+description: 'Greenhouse offices.'
+weight: 0

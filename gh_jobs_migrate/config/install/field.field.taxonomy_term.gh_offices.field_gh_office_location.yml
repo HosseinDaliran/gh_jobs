@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_gh_office_location
+    - taxonomy.vocabulary.gh_offices
+id: taxonomy_term.gh_offices.field_gh_office_location
+field_name: field_gh_office_location
+entity_type: taxonomy_term
+bundle: gh_offices
+label: Location
+description: 'Office location value.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

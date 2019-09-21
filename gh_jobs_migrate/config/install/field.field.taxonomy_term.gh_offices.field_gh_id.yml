@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_gh_id
+    - taxonomy.vocabulary.gh_offices
+id: taxonomy_term.gh_offices.field_gh_id
+field_name: field_gh_id
+entity_type: taxonomy_term
+bundle: gh_offices
+label: 'Greenhouse ID'
+description: 'The Greenhouse Office ID.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: Departments
+vid: gh_departments
+description: 'Greenhouse departments.'
+weight: 0
