@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.job.field_gh_content
+    - field.field.node.job.field_gh_departments
+    - field.field.node.job.field_gh_id
+    - field.field.node.job.field_gh_location
+    - field.field.node.job.field_gh_offices
+    - node.type.job
+  module:
+    - user
+id: node.job.teaser
+targetEntityType: node
+bundle: job
+mode: teaser
+content:
+  field_gh_location:
+    type: string
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  links:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  field_gh_content: true
+  field_gh_departments: true
+  field_gh_id: true
+  field_gh_offices: true

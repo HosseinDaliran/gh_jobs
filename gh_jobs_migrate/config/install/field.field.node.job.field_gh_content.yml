@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_gh_content
+    - node.type.job
+  module:
+    - text
+id: node.job.field_gh_content
+field_name: field_gh_content
+entity_type: node
+bundle: job
+label: Content
+description: 'Job content value.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
