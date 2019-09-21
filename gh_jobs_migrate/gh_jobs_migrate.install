@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Install, update and uninstall functions for the gh_jobs_migration module.
+ */
+
+/**
  * Implements hook_uninstall().
  */
 function gh_jobs_migrate_uninstall() {
