@@ -3,11 +3,13 @@
  * Script to load the Apply Iframe to the page.
  */
 
-(function ($, Drupal) {
+(($, Drupal) => {
+  'use strict';
+
   let loaded = false;
 
-  function load(id) {
-    if (!loaded && typeof Grnhse != "undefined") {
+  let load = (id) => {
+    if (!loaded && typeof Grnhse != 'undefined') {
       loaded = true;
       Grnhse.Iframe.load(id);
     }
