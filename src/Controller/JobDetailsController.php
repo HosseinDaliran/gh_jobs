@@ -11,6 +11,7 @@ use Greenhouse\GreenhouseToolsPhp\Clients\Exceptions\GreenhouseAPIResponseExcept
 use Greenhouse\GreenhouseToolsPhp\GreenhouseService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\gh_jobs\GhJobsInterface;
+use Drupal\key\KeyRepositoryInterface;
 
 /**
  * Class GHJobDetailsController.
@@ -71,14 +72,15 @@ class JobDetailsController extends ControllerBase implements GhJobsInterface {
    * @param \Drupal\Core\Routing\UrlGeneratorInterface $url_generator
    *   Drupal URL service.
    */
-  public function __construct(Messenger $messenger, ConfigFactoryInterface $config_factory, CacheBackendInterface $cache, UrlGeneratorInterface $url_generator) {
+  public function __construct(Messenger $messenger, ConfigFactoryInterface $config_factory, CacheBackendInterface $cache, UrlGeneratorInterface $url_generator, KeyRepositoryInterface $key_repo) {
     $this->ghConfig = $config_factory->get(self::GH_JOBS_SETTINGS);
     $this->messenger = $messenger;
     $this->cache = $cache;
     $this->job = NULL;
     $this->urlGenerator = $url_generator;
+    $key_id = $this->ghConfig->get(self::API_KEY_CONFIG_NAME);
     $keys = [
-      'apiKey' => $this->ghConfig->get(self::API_KEY_CONFIG_NAME),
+      'apiKey' => $key_repo->getKey($key_id),
       'boardToken' => $this->ghConfig->get(self::BOARD_TOKEN_CONFIG_NAME),
     ];
     $this->greenhouseService = new GreenhouseService($keys);
@@ -92,7 +94,8 @@ class JobDetailsController extends ControllerBase implements GhJobsInterface {
       $container->get('messenger'),
       $container->get('config.factory'),
       $container->get('cache.data'),
-      $container->get('url_generator')
+      $container->get('url_generator'),
+      $container->get('key.repository')
     );
   }
 
