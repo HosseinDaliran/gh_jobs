@@ -13,12 +13,12 @@ full job with the apply form.
 
 ## LINKS
 
-Project page:
-[https://www.drupal.org/project/gh_jobs](https://www.drupal.org/project/gh_jobs)
-Example repository:
-[https://github.com/adrianopulz/gh_jobs](https://github.com/adrianopulz/gh_jobs)
-Submit bug reports, feature suggestions:
-[https://drupal.org/project/issues/gh_jobs](https://drupal.org/project/issues/gh_jobs)
+- Project page:
+  [https://www.drupal.org/project/gh_jobs](https://www.drupal.org/project/gh_jobs)
+- Example repository:
+  [https://github.com/adrianopulz/gh_jobs](https://github.com/adrianopulz/gh_jobs)
+- Submit bug reports, feature suggestions:
+  [https://drupal.org/project/issues/gh_jobs](https://drupal.org/project/issues/gh_jobs)
 
 ## MAINTAINERS
 
