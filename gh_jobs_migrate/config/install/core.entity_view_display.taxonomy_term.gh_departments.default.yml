@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.gh_departments.field_gh_id
+    - taxonomy.vocabulary.gh_departments
+  module:
+    - text
+id: taxonomy_term.gh_departments.default
+targetEntityType: taxonomy_term
+bundle: gh_departments
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_gh_id: true
