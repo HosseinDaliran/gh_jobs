@@ -23,5 +23,7 @@ Submit bug reports, feature suggestions:
 
 - adrianopulz -
   [https://drupal.org/u/adrianopulz](https://drupal.org/u/adrianopulz)
+- benjifisher -
+  [https://drupal.orgu/u/benjifisher](https://drupal.orgu/u/benjifisher)
 - leonardopost -
   [https://drupal.orgu/u/leonardopost](https://drupal.orgu/u/leonardopost)
