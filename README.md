@@ -6,8 +6,9 @@ full job with the apply form.
 
 ## GETTING STARTED
 
-- Get your Greenhouse APKey and Board Token.
-- On module settings, add the APIKey and board name.
+- Get your Greenhouse API Key and Board Token.
+- Use the Key module to save the API Key.
+- On module settings, add the Key and board name.
 - Access the `/career` page to see your jobs.
 
 ## LINKS
