@@ -5,6 +5,8 @@ namespace Drupal\gh_jobs\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\gh_jobs\GhJobsInterface;
+use Drupal\key\KeyRepositoryInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class ConfigForm.
@@ -12,6 +14,31 @@ use Drupal\gh_jobs\GhJobsInterface;
  * @package Drupal\gh_jobs\Form
  */
 class ConfigForm extends ConfigFormBase implements GhJobsInterface {
+
+  /**
+   * The key repository.
+   *
+   * @var \Drupal\key\KeyRepositoryInterface
+   */
+  protected $keyRepo;
+
+  /**
+   * Construct a ConfigForm.
+   *
+   * @param \Drupal\key\KeyRepositoryInterface $key_repo
+   */
+  public function __construct(KeyRepositoryInterface $key_repo) {
+    $this->keyRepo = $key_repo;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('key.repository')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -36,7 +63,7 @@ class ConfigForm extends ConfigFormBase implements GhJobsInterface {
     $config = $this->config(self::GH_JOBS_SETTINGS);
 
     $form['api_key'] = [
-      '#type' => 'textfield',
+      '#type' => 'key_select',
       '#title' => $this->t('APIKey'),
       '#default_value' => $config->get('api_key'),
       '#required' => TRUE,

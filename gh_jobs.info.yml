@@ -4,3 +4,5 @@ type: module
 core_version_requirement: ^9 || ^10
 package: Third-party Integration
 configure: gh_jobs.settings
+dependencies:
+  - key:key
