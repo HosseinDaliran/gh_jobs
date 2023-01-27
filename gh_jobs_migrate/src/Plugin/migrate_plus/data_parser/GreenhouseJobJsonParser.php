@@ -30,7 +30,7 @@ class GreenhouseJobJsonParser extends Json implements GhJobsInterface {
   /**
    * {@inheritdoc}
    */
-  public function getSourceData($url) {
+  public function getSourceData(string $url): array {
     // Call the parent function to retrieve the data.
     $source_data = parent::getSourceData($url);
 

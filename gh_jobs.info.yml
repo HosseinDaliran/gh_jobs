@@ -1,6 +1,6 @@
 name: Greenhouse Job Board API
 description: Provides Greenhouse integrations with Job Board API.
 type: module
-core: 8.x
+core_version_requirement: ^9 || ^10
 package: Third-party Integration
 configure: gh_jobs.settings

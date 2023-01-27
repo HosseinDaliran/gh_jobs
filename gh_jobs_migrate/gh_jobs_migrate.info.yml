@@ -1,7 +1,7 @@
 name: Greenhouse Job Migrate
 description: Import your Jobs from Greenhouse as nodes.
 type: module
-core: 8.x
+core_version_requirement: ^9 || ^10
 package: Third-party Integration
 dependencies:
   - gh_jobs:gh_jobs
