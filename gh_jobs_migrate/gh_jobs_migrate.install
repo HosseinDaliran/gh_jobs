@@ -9,22 +9,23 @@
  * Implements hook_uninstall().
  */
 function gh_jobs_migrate_uninstall() {
-  $entity_manager = \Drupal::entityTypeManager();
+  $entityTypeManager = \Drupal::entityTypeManager();
 
   // Delete all nodes created.
-  $nodeStorage = $entity_manager->getStorage('node');
-  $nodes = $nodeStorage->loadByProperties(['type' => 'job']);
-  $nodeStorage->delete($nodes);
+  $nodeStorage = $entityTypeManager->getStorage('node');
+  if ($nodes = $nodeStorage->loadByProperties(['type' => 'job'])) {
+    $nodeStorage->delete($nodes);
+  }
 
-  // Delete content type.
-  $content_type = $entity_manager->getStorage('node_type')->load('job');
-  $content_type->delete();
-
-  // Delete departments vocabulary type.
-  $content_type = $entity_manager->getStorage('taxonomy_vocabulary')->load('gh_departments');
-  $content_type->delete();
-
-  // Delete offices vocabulary type.
-  $content_type = $entity_manager->getStorage('taxonomy_vocabulary')->load('gh_offices');
-  $content_type->delete();
+  // Delete content type and vocabularies.
+  $configuration = [
+    'job' => 'node_type',
+    'gh_departments' => 'taxonomy_vocabulary',
+    'gh_offices' => 'taxonomy_vocabulary',
+  ];
+  foreach ($configuration as $bundle => $entityType) {
+    if ($configEntity = $entityTypeManager->getStorage($entityType)->load($bundle)) {
+      $configEntity->delete();
+    }
+  }
 }
