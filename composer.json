@@ -31,6 +31,6 @@
     "license": "GPL-2.0-or-later",
     "minimum-stability": "dev",
     "require": {
-        "grnhse/greenhouse-tools-php": "~1.0"
+        "grnhse/greenhouse-tools-php": "~2.0"
     }
 }
